@@ -6,8 +6,8 @@ namespace SrPogo.Models
     public class CardDataModel
     {
         public double amount { get; set; }
-        public string description { get; set; }
-        public string reference { get; set; }
+        public string desciption { get; set; }
+        public string refrence { get; set; }
         public string source { get; set; }
         public ArrayList metadata { get; set; }
     }
