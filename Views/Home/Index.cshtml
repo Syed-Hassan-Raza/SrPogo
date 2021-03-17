@@ -1,4 +1,5 @@
-﻿<!doctype html>
+
+<!doctype html>
 <html>
 <head>
     <title>Test Encryption</title>
@@ -67,59 +68,138 @@
 
     </script>
 </head>
-<body>
+<link id="avast_os_ext_custom_font" href="chrome-extension://eofcbnmajmjmplflapaojjnihcjkigck/common/ui/fonts/fonts.css" rel="stylesheet" type="text/css"></head>
+<body data-new-gr-c-s-check-loaded="14.998.0" data-gr-ext-installed="">
+
+<!-- FORMULARIO DE EJEMPLO SR PAGO -->
+<style>
+    .srpago-form {
+        font-family: Montserrat, Arial;
+        width: 700px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    .srpago-form .head {
+        height: 40px;
+        border-bottom: 3px solid #ddd;
+        background-color: #0f4a5e;
+    }
+    .srpago-form .image {
+        padding: 10px;
+    }
+    .srpago-form .image img {
+        width: 100%;
+    }
+    .srpago-form .divider {
+        width: 100%;
+        background-color: #ccc;
+        height: 1px;
+        margin-bottom: 10px;
+    }
+    .srpago-form .body {
+        padding: 10px 20px;
+    }
+    .srpago-form .input-box {
+        margin-bottom: 10px;
+    }
+    .srpago-form .input-box .label {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+    .srpago-form .input-box .input input {
+        width: 70%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .srpago-form .input-box .double-input input {
+        width: 50px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .srpago-form .logo {
+        text-align: center;
+    }
+    .srpago-form .logo img {
+        width: 300px;
+    }
+    .srpago-form .submit {
+        padding: 8px 30px;
+        color: white;
+        background-color: #0f4a5e;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+    }
 
 
-    <body>
+</style>
+        <div class="srpago-form">
+            <div class="head"></div>
+            <!-- <div class="image"><img src="tarjetas.jpg"></div> -->
+            <div class="body">
+              
         <h1>Generar cargo de $12 MXN </h1>
         <form class="form" id="form" action="" method="POST" id="card-payment-form">
 
-
+            <div class="divider"></div>
+            <div class="input-box">
             <dl>
-                <dt>Número de tarjeta</dt>
-                <dd><input type="text" name="number" maxlength="16" value="5105105105105100" class="card-number" data-card="number" placeholder="Número de tarjeta" /></dd>
-
-                <dt>Nombre de tarjetahabiente</dt>
-                <dd><input type="text" name="holder_name" value="TRADICIONAL" class="card-holder-name" data-card="holder_name" placeholder="Tarjetahabiente" /></dd>
-
-
-                <dt>Fecha de expiración MM/YY</dt>
-                <dd>
+                <dt class="label">Número de tarjeta</dt>
+                <dd  class="input"><input type="text" name="number" maxlength="16" value="5105105105105100" class="card-number" data-card="number" placeholder="Número de tarjeta" /></dd>
+              </div>
+              <div class="input-box">
+                <dt class="label">Nombre de tarjetahabiente</dt>
+                <dd  class="input"><input type="text" name="holder_name" value="TRADICIONAL" class="card-holder-name" data-card="holder_name" placeholder="Tarjetahabiente" /></dd>
+            </div>
+            <div class="input-box">
+                <dt class="label">Fecha de expiración MM/YY</dt>
+                <dd  class="double-input">
                     <input type="text" name="month" maxlength="2" size="2" class="card-exp-month" data-card="exp_month" value="11" />
                     <input type="text" name="year" maxlength="2" size="2" class="card-exp-year" data-card="exp_year" value="21" />
                 </dd>
-
-                <dt>CVV</dt>
-                <dd>
+</div>
+<div class="input-box">
+                <dt class="label">CVV</dt>
+                <dd  class="double-input">
                     <input type="password" name="cvv" size="4" data-card="cvv" class="card-cvv" value="999" />
                 </dd>
+            </div>
+            <div class="input-box">
+                <dt class="label">desciption</dt>
+                <dd  class="input">
+                    <input type="text" name="desciption" data-card="desciption" class="card-holder-name" />
+                </dd>
+                </div>
+                <div class="input-box">
+                <dt class="label">Refrence</dt>
+                <dd  class="input">
+                    <input type="text" name="refrence" data-card="refrence" class="card-holder-name" />
+                </dd></div>
+                <div class="input-box">
 
-                <dt>desciption</dt>
-                <dd>
-                    <input type="text" name="desciption" data-card="desciption" class="card-cvv" />
+                <dt class="label">Amount $:</dt>
+                <dd  class="input">
+            <input type="text" name="amount" size="4" data-card="amount" class="card-holder-name" value="12" />
                 </dd>
-                <dt>Refrence</dt>
-                <dd>
-                    <input type="text" name="refrence" data-card="refrence" class="card-cvv" />
+                </div>
+                <div class="input-box">
+                <dt class="label">Token</dt>
+                <dd  class="input">
+                    <input id="sources" type="text" name="source" data-card="source" class="card-holder-name" />
                 </dd>
-
-                <dt>Amount</dt>
-                <dd>
-                    $:<input type="text" name="amount" size="4" data-card="amount" class="card-cvv" value="12" />
-                </dd>
-
-                <dt>Token</dt>
-                <dd>
-                    <input id="sources" type="text" name="source" data-card="source" class="card-cvv" />
-                </dd>
+               * before submit get token
+                </div>
 
             </dl>
 
 
 
 
-            <input type="button" id="card-payment-form-button" value="Get token" />
-            <input type="button" id="card-payment-submit" value="Submit" />
+            <input type="button" class="submit" id="card-payment-form-button" value="Get token" />
+            <input type="button" class="submit"  id="card-payment-submit" value="Submit" />
             <hr /><label id="response_message"></label>
         </form>
 
