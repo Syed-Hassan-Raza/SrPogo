@@ -33,8 +33,8 @@ namespace SrPogo.Controllers
 
             Dictionary<string, object> chargeParams = new Dictionary<string, object>();
             chargeParams.Add("amount", cardData.amount);
-            chargeParams.Add("description", cardData.description);
-            chargeParams.Add("reference", cardData.reference);
+            chargeParams.Add("description", cardData.desciption);
+            chargeParams.Add("reference", cardData.refrence);
             chargeParams.Add("source", cardData.source);
             //chargeParams.Add("metadata", cardData.metadata);
 
