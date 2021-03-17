@@ -1,0 +1,132 @@
+﻿<!doctype html>
+<html>
+<head>
+    <title>Test Encryption</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript" src="https://js.srpago.com/v1/srpago.min.js"></script>
+    <script type="text/javascript" src="https://js.srpago.com/v1/srpago.encryption.min.js"></script>
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+            SrPago.setLiveMode(false);
+            SrPago.setPublishableKey("pk_dev_60466361985f6QRstc");
+
+
+            $('#card-payment-form-button').click(function (event) {
+
+                var onSuccessHandler = function (result) {
+                    debugger
+                    $("#response_message").html("Con este token procesará el pago desde su Servidor " + result.token);
+                    $("#sources").val(result.token);
+                    var data = $('#form').serialize();
+                };
+
+                var onFailHandler = function (error) {
+                    $("#response_message").html("Error " + error.code + ": " + error.message);
+                };
+
+                var card = {
+                    number: $('.card-number').val(),
+                    holder_name: $('.card-holder-name').val(),
+                    cvv: $('.card-cvv').val(),
+                    exp_month: $('.card-exp-month').val(),
+                    exp_year: $('.card-exp-year').val()
+                };
+
+                SrPago.token.create(card, onSuccessHandler, onFailHandler);
+
+
+                return false;
+
+            });
+
+            $('#card-payment-submit').click(function (event) {
+                debugger
+                var data = $('#form').serialize();
+
+                $.ajax({
+                    url: 'https://localhost:44361/api/values/PostPayment',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: data,
+                    success: function (data, textStatus, xhr) {
+                        console.log(data);
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log('Error in Operation');
+                    }
+                });
+
+
+            });
+
+        });
+
+    </script>
+</head>
+<body>
+
+
+    <body>
+        <h1>Generar cargo de $12 MXN </h1>
+        <form class="form" id="form" action="" method="POST" id="card-payment-form">
+
+
+            <dl>
+                <dt>Número de tarjeta</dt>
+                <dd><input type="text" name="number" maxlength="16" value="5105105105105100" class="card-number" data-card="number" placeholder="Número de tarjeta" /></dd>
+
+                <dt>Nombre de tarjetahabiente</dt>
+                <dd><input type="text" name="holder_name" value="TRADICIONAL" class="card-holder-name" data-card="holder_name" placeholder="Tarjetahabiente" /></dd>
+
+
+                <dt>Fecha de expiración MM/YY</dt>
+                <dd>
+                    <input type="text" name="month" maxlength="2" size="2" class="card-exp-month" data-card="exp_month" value="11" />
+                    <input type="text" name="year" maxlength="2" size="2" class="card-exp-year" data-card="exp_year" value="21" />
+                </dd>
+
+                <dt>CVV</dt>
+                <dd>
+                    <input type="password" name="cvv" size="4" data-card="cvv" class="card-cvv" value="999" />
+                </dd>
+
+                <dt>desciption</dt>
+                <dd>
+                    <input type="text" name="desciption" data-card="desciption" class="card-cvv" />
+                </dd>
+                <dt>Refrence</dt>
+                <dd>
+                    <input type="text" name="refrence" data-card="refrence" class="card-cvv" />
+                </dd>
+
+                <dt>Amount</dt>
+                <dd>
+                    $:<input type="text" name="amount" size="4" data-card="amount" class="card-cvv" value="12" />
+                </dd>
+
+                <dt>Token</dt>
+                <dd>
+                    <input id="sources" type="text" name="source" data-card="source" class="card-cvv" />
+                </dd>
+
+            </dl>
+
+
+
+
+            <input type="button" id="card-payment-form-button" value="Get token" />
+            <input type="button" id="card-payment-submit" value="Submit" />
+            <hr /><label id="response_message"></label>
+        </form>
+
+
+
+
+
+
+    </body>
+</html>
